@@ -1,5 +1,5 @@
 # Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotly Express Charts
-## Supporting file for my Medium articles on the above heading
+## Supporting files for my Medium articles on the above heading
 
 This repository contains the supporting files for my Medium series of articles. 
 1. [Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotlys' Basic Charts](https://medium.com/@twelsh37/creating-stunning-visualizations-with-plotly-a-beginners-guide-to-basic-charts-50388da332b4)
