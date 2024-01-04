@@ -29,7 +29,7 @@ def create_bar_chart(df):
     # Create the bar chart
     fig = px.bar(df, x="continent", y="lifeExp")
 
-    # Show the figure
+    # Display the figure
     fig.show()
 
 

@@ -50,7 +50,7 @@ def create_funnel_chart():
         # The background color of the plot is updated to transparent
         fig.update_layout(plot_bgcolor="rgba(0, 0, 0, 0)")
 
-        # Display the plot
+        # Display the figure
         fig.show()
 
     except Exception as e:

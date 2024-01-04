@@ -29,7 +29,7 @@ def plot_life_expectancy():
             title="Rise In Life Expectancy, Afghanistan 1952 - 2007",
         ).update_layout(plot_bgcolor="rgba(0, 0, 0, 0)")
 
-        # Show the figure
+        # Display the figure
         fig.show()
 
     except Exception as e:

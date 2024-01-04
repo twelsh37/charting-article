@@ -39,6 +39,7 @@ def create_scatter_plot(country):
             },
             title=f"Bubble Chart depicting {country} Life expectancy vs GDP Per Capita",
         )
+        # Display the figure
         fig.show()
 
     except Exception as e:

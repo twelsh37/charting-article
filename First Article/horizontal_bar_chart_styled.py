@@ -31,7 +31,7 @@ def plot_life_expectancy():
             title="Average life expectancy by Continent",
         )
 
-        # Show the figure
+        # Display the figure
         fig.show()
 
     except Exception as e:

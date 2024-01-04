@@ -32,7 +32,8 @@ def create_bar_chart(df_grouped):
     try:
         # Create the bar chart with 'lifeExp' on the x-axis and 'continent' on the y-axis
         fig = px.bar(df_grouped, x="lifeExp", y="continent")
-        # Show the figure
+
+        # Display the figure
         fig.show()
     except Exception as e:
         print("An error occurred while creating the bar chart.")

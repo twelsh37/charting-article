@@ -34,6 +34,8 @@ def create_scatter_plot(data):
         },
         title="Scatter Plot of GDP Per Capita and Life Expectancy",
     )
+
+    # Display the figure
     fig.show()
 
 

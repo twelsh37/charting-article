@@ -74,8 +74,9 @@ def create_figure(df):
     # Set the title of the y-axis to "Entities"
     fig.update_yaxes(title_text="Entities")
 
+    # Display the figure
     fig.show()
-    # return fig
+
 
 def main():
     """
