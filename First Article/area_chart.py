@@ -1,31 +1,48 @@
-# Import the Plotly Express library
+# Import the necessary libraries
 import plotly.express as px
 
-# Load the gapminder dataset
-gapminder = px.data.gapminder()
 
-# Create an area chart using the gapminder dataset
-# The x-axis represents the year
-# The y-axis represents the GDP per Capita
-# Different continents are represented by different colors
-# Each line group represents a country
-# The labels are customized to "GDP Per Capita" for gdpPercap and "Year" for year
-# The title of the chart is set to "Rise in GDP Per Capita,  1952 - 2007"
-fig = px.area(
-    gapminder,
-    x="year",
-    y="gdpPercap",
-    color="continent",
-    line_group="country",
-    labels={
-        "gdpPercap": "GDP Per Capita",
-        "year": "Year",
-    },
-    title="Rise in GDP Per Capita,  1952 - 2007",
-)
+# Define a function to create and display the area chart
+def create_area_chart():
+    try:
+        # Load the gapminder dataset
+        gapminder = px.data.gapminder()
 
-# The background color of the plot is updated to transparent
-fig.update_layout(plot_bgcolor="rgba(0, 0, 0, 0)")
+        # Create an area chart using the gapminder dataset
+        fig = px.area(
+            gapminder,
+            x="year",
+            y="gdpPercap",
+            # Different continents are represented by different colors
+            color="continent",
+            # Each line group represents a country
+            line_group="country",
+            labels={
+                "gdpPercap": "GDP Per Capita",
+                "year": "Year",
+            },
+            title="Rise in GDP Per Capita,  1952 - 2007",
+        )
 
-# Display the figure
-fig.show()
+        # Update the background color of the plot to transparent
+        fig.update_layout(plot_bgcolor="rgba(0, 0, 0, 0)")
+
+        # Display the figure
+        fig.show()
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def main():
+    """
+    Execute the main workflow.
+    """
+    try:
+        create_area_chart()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+if __name__ == "__main__":
+    main()
