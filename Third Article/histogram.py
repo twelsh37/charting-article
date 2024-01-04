@@ -2,42 +2,69 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
-# DATASET From - https://www.ons.gov.uk/datasets/TS007/editions/2021/versions/3
-# Dataset renamed FROM: TS007-2021-3.csv TO: age.csv
 
-# read in our dataset
-df = pd.read_csv('../datafiles/age.csv')
-
-# setup our colum renames'
-nom = {'Lower tier local authorities Code': 'ltlac',
-        'Lower tier local authorities': 'region',
-        'Age (101 categories) Code': 'age_code',
-        'Age (101 categories)': 'age',
-        'Observation': 'number'
-       }
-
-# Rename our columns
-df.rename(columns=nom, inplace=True)
-
-# Function to generate bins and labels
 def generate_bins_labels(bin_width):
-    # np.inf ensures anything above 100 goes into the last bin
+    """
+    Function to generate bins and labels for age groups.
+
+    Parameters:
+    bin_width (int): The width of each bin.
+
+    Returns:
+    bins (list): The list of bins.
+    labels (list): The list of labels for each bin.
+    """
     bins = list(range(0, 101, bin_width)) + [np.inf]
     labels = [f'{i+1} - {i + bin_width}' for i in bins[:-2]] + [f'{bins[-2]+1}+']
     return bins, labels
 
-# Define the bin width
-bin_width = 10  # Adjusted to 10 items per bin
 
-# Generate bins and labels
-bins, labels = generate_bins_labels(bin_width)
+def histogram_chart():
+    """
+    Function to process the dataframe and plot a histogram.
+    """
 
-# Create a new column for the binned ages
-df['age_group'] = pd.cut(df['age_code'], bins=bins, labels=labels, include_lowest=True)
+    try:
+        df = pd.read_csv('../datafiles/age.csv')
+    except FileNotFoundError:
+        print("File not found. Please check the file path.")
+        return
 
-# Group by 'age_group' and sum 'number'
-df_grouped = df.groupby('age_group', observed=True)['number'].sum().reset_index()
+    # our list to rename the columns
+    nom = {'Lower tier local authorities Code': 'ltlac',
+           'Lower tier local authorities': 'region',
+           'Age (101 categories) Code': 'age_code',
+           'Age (101 categories)': 'age',
+           'Observation': 'number'
+           }
 
-fig = px.histogram(df_grouped, x = 'age_group', y = 'number')
-fig.update_layout(width=800, height=800)
-fig.show()
+    # rename the columns
+    df.rename(columns=nom, inplace=True)
+
+
+    bin_width = 10
+    bins, labels = generate_bins_labels(bin_width)
+
+    # filter the dataframe
+    df['age_group'] = pd.cut(df['age_code'], bins=bins, labels=labels, include_lowest=True)
+    df_grouped = df.groupby('age_group', observed=True)['number'].sum().reset_index()
+
+    fig = px.histogram(df_grouped, x='age_group', y='number')
+    fig.update_layout(width=800, height=800)
+
+    # Display the chart
+    fig.show()
+
+
+def main():
+    """
+    Main function to read the dataset and call the histogram_chart function.
+    """
+    try:
+        histogram_chart()
+    except Exception as e:
+        print(f"Error in plotting: {e}")
+
+
+if __name__ == "__main__":
+    main()
