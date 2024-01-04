@@ -1,7 +1,8 @@
 # Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotly Express Charts
 ## Supporting files for my Medium articles on the above heading
 
-This repository contains the supporting files for my Medium series of articles. 
+This repository contains the supporting files for my Medium series of articles.<br>
+The code in the articles is quite simple and is designed to show how easy it is to create stunning visualisations with Plotly Express. the files here are broken into functions along with docstrings and error handling.<p> 
 1. [Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotlys' Basic Charts](https://medium.com/@twelsh37/creating-stunning-visualizations-with-plotly-a-beginners-guide-to-basic-charts-50388da332b4)
 2. [Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotlys' Part-of-Whole Charts](https://medium.com/@twelsh37/creating-stunning-visualisations-with-plotly-a-beginners-guide-to-plotlys-part-of-whole-0b824f9d6cd4)
 3. Comming soon - Creating Stunning Visualisations with Plotly: A Beginner's Guide to Plotlys' 1D Distribution charts.
