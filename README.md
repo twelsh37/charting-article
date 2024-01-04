@@ -17,14 +17,9 @@ This repository contains the supporting files for my Medium series of articles.
 * Numpy
 
 ## Installation
-To install Plotly Express use the following command in your terminal:
+To install the requirements for this code, use the following command in your terminal:
 ```bash
 pip install -r requirements.txt
-```
-
-## Usage
-```python
-import plotly.express as px
 ```
 
 ## License
