@@ -42,6 +42,7 @@ def create_histogram(df, column_name, bin_size, plot_title):
         fig = px.histogram(df, x=column_name, nbins=bin_size, title=plot_title)
         fig.update_xaxes(title_text='Value')
         fig.update_yaxes(title_text='Count')
+        fig.update_layout(width=800, height=800)
         return fig
     except ValueError as e:
         print(f"ValueError: {e}")
