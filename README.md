@@ -10,6 +10,7 @@ The code in the articles is quite simple and is designed to show how easy it is 
  I decided to write several articles on Plotly Express charting to show the power of Plotly Express and how easy it is to create stunning visualisations with it.<p>
  Where possible I have cited the dataset that I used in the article. <p>
 The code here in this repo is augmented from the simpler code that is used in the articles. This code is split into functions and has rudimentary error handling<p> 
+Docstrings were created by AI<p>
 If you have any questions or comments please feel free to contact me.
 
 
