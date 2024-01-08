@@ -18,8 +18,8 @@ def plot_salary_comparison():
 
         # plot our box plot
         box = px.box(country_df,
-                     x='company_location',
-                     y='salary_in_usd',
+                     x='salary_in_usd',
+                     y='company_location',
                      color='company_location',
                      labels={
                          "salary_in_usd": "Salary (USD)",
@@ -29,7 +29,7 @@ def plot_salary_comparison():
                     )
 
         # Set the chart size to 1000 x 1000 pixels and disable the legend
-        box.update_layout(showlegend=False, autosize=False, width=1000, height=1000)
+        box.update_layout(showlegend=False, autosize=False, width=1000, height=800)
 
         # Display our chart
         box.show()
