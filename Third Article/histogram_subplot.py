@@ -34,7 +34,7 @@ def create_histogram(df, bin_sizes):
     """
     subplot_titles = [f'Bin size: {bin_size}' for bin_size in bin_sizes]
 
-    fig = make_subplots(rows=1, cols=3, subplot_titles=subplot_titles)
+    fig = make_subplots(rows=1, cols=4, subplot_titles=subplot_titles)
 
     for i, bin_size in enumerate(bin_sizes, start=1):
         hist = go.Histogram(x=df['Value'], nbinsx=bin_size, name=f'Bin size {bin_size}')
@@ -53,7 +53,7 @@ def main():
     """
     try:
         file_path = '../datafiles/normal_distribution.csv'
-        bin_sizes = [100, 250, 400]
+        bin_sizes = [10, 31, 100, 250]
 
         df = read_data(file_path)
 
