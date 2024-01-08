@@ -1,69 +1,66 @@
 import pandas as pd
-import numpy as np
 import plotly.express as px
 
 
-def generate_bins_labels(bin_width):
+def read_dataset(file_path):
     """
-    Function to generate bins and labels for age groups.
+    Reads a CSV file into a pandas DataFrame.
 
     Parameters:
-    bin_width (int): The width of each bin.
+    file_path (str): The path to the CSV file.
 
     Returns:
-    bins (list): The list of bins.
-    labels (list): The list of labels for each bin.
+    pandas.DataFrame: The DataFrame containing the CSV data.
     """
-    bins = list(range(0, 101, bin_width)) + [np.inf]
-    labels = [f'{i+1} - {i + bin_width}' for i in bins[:-2]] + [f'{bins[-2]+1}+']
-    return bins, labels
-
-
-def histogram_chart():
-    """
-    Function to process the dataframe and plot a histogram.
-    """
-
     try:
-        df = pd.read_csv('../datafiles/age.csv')
+        return pd.read_csv(file_path)
     except FileNotFoundError:
-        print("File not found. Please check the file path.")
-        return
-
-    # our list to rename the columns
-    nom = {'Lower tier local authorities Code': 'ltlac',
-           'Lower tier local authorities': 'region',
-           'Age (101 categories) Code': 'age_code',
-           'Age (101 categories)': 'age',
-           'Observation': 'number'
-           }
-
-    # rename the columns
-    df.rename(columns=nom, inplace=True)
+        print(f"The file {file_path} was not found.")
+        raise
+    except pd.errors.EmptyDataError:
+        print("The file is empty.")
+        raise
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        raise
 
 
-    bin_width = 10
-    bins, labels = generate_bins_labels(bin_width)
+def create_histogram(df, column_name, bin_size, plot_title):
+    """
+    Creates a histogram using Plotly Express.
 
-    # filter the dataframe
-    df['age_group'] = pd.cut(df['age_code'], bins=bins, labels=labels, include_lowest=True)
-    df_grouped = df.groupby('age_group', observed=True)['number'].sum().reset_index()
+    Parameters:
+    df (pandas.DataFrame): The DataFrame containing the data to plot.
+    column_name (str): The name of the DataFrame column to plot.
+    bin_size (int): The number of bins for the histogram.
+    plot_title (str): The title of the plot.
 
-    fig = px.histogram(df_grouped, x='age_group', y='number')
-    fig.update_layout(width=800, height=800)
-
-    # Display the chart
-    fig.show()
+    Returns:
+    plotly.graph_objs._figure.Figure: The Plotly figure object for the histogram.
+    """
+    try:
+        fig = px.histogram(df, x=column_name, nbins=bin_size, title=plot_title)
+        fig.update_xaxes(title_text='Value')
+        fig.update_yaxes(title_text='Count')
+        return fig
+    except ValueError as e:
+        print(f"ValueError: {e}")
+        raise
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        raise
 
 
 def main():
     """
-    Main function to read the dataset and call the histogram_chart function.
+    Main function to read the dataset and create a histogram.
     """
     try:
-        histogram_chart()
+        df = read_dataset('../datafiles/normal_distribution.csv')
+        histogram_fig = create_histogram(df, 'Value', 50, 'Normal Distribution')
+        histogram_fig.show()
     except Exception as e:
-        print(f"Error in plotting: {e}")
+        print(f"An error occurred in the main function: {e}")
 
 
 if __name__ == "__main__":
