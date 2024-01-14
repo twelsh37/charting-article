@@ -20,7 +20,7 @@ def plot_ecdf():
         salary_df = pd.read_csv(file_path)
 
         # Countries we are interested in
-        countries = ['US', 'GB', 'IN']
+        countries = ['US']
 
         # filter the dataframe based on the countries we want to plot
         country_df = salary_df[salary_df['company_location'].isin(countries)].copy()
@@ -34,6 +34,7 @@ def plot_ecdf():
                       markers=False,
                       lines=True,
                       marginal="histogram",
+                      title="ECDF plot with a marginal histogram - US Salaries",
                       )
 
         # The background color of the plot is updated to transparent
