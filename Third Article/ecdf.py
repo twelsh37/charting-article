@@ -1,70 +1,53 @@
-import pandas as pd
 import plotly.express as px
+import pandas as pd
 
 
-def read_and_filter_data(file_path, countries):
+def create_ecdf_plot(dataframe):
     """
-    Reads the dataset from the given file path and filters it based on the specified countries.
+    Create an ECDF plot with a marginal histogram for a given DataFrame.
 
     Parameters:
-    - file_path: str, the path to the CSV file containing the dataset.
-    - countries: list, a list of country codes to filter the dataset by.
+    dataframe: The DataFrame containing the data to plot.
 
     Returns:
-    - A pandas DataFrame containing the filtered data.
+    plotly.graph_objs._figure.Figure: The ECDF plot figure.
     """
-    try:
-        # read in our dataset
-        df = pd.read_csv(file_path)
-        # filter the dataframe based on the countries we want to plot
-        filtered_df = df[df['company_location'].isin(countries)].copy()
-        return filtered_df
-    except Exception as e:
-        print(f"An error occurred while reading or filtering the data: {e}")
-        raise
+    fig = px.ecdf(
+        dataframe,
+        x="std_dev_data",
+        labels={
+            "std_dev_data": "Normal Distribution",
+        },
+        markers=False,
+        lines=True,
+        marginal="histogram",
+        title="ECDF plot with a marginal histogram - normal distribution",
+    )
 
+    # Update the background color of the plot to transparent
+    fig.update_layout(
+        plot_bgcolor="rgba(0, 0, 0, 0)", width=800, height=800, showlegend=False
+    )
 
-def plot_ecdf():
-    """
-    Plots an ECDF chart for the given dataframe.
+    # Setup x Axis grid lines (verticals)
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor="grey")
 
-    Parameters:
-    - dataframe: DataFrame, the pandas DataFrame to plot.
+    # Disable Y axis grid lines
+    fig.update_yaxes(showgrid=False)
 
-    Returns:
-    - The ECDF plot.
-    """
-    try:
-        # Data file
-        file_path = '../datafiles/ds_salaries.csv'
-
-        # Countries we are interested in
-        countries = ['US', 'GB', 'IN']
-
-        # Read in our data and filter it
-        df = read_and_filter_data(file_path, countries)
-
-        # create an ECDF plot
-        ecdf_plot = px.ecdf(df, x='salary_in_usd')
-
-        # Set the chart size to 800 x 800 pixels
-        ecdf_plot.update_layout(width=800, height=800)
-
-        # Display our chart
-        ecdf_plot.show()
-    except Exception as e:
-        print(f"An error occurred while plotting the ECDF: {e}")
-        raise
+    return fig
 
 
 def main():
     """
-    Main function to execute the program logic.
+    Main function to create and display the ECDF plot.
     """
     try:
-        plot_ecdf()
+        df2 = pd.read_csv('../datafiles/random_data.csv')
+        fig = create_ecdf_plot(df2)
+        fig.show()
     except Exception as e:
-        print(f"An error occurred in the main function: {e}")
+        print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
